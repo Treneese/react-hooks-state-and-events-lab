@@ -1,86 +1,25 @@
-// import React, { useState } from "react";
-// import Item from "./Item";
-// import React from "react";
-
-// function ShoppingList({ items }) {
-//   const [selectedCategory, setSelectedCategory] = useState("All");
-
-//   // function handleCategoryChange(event){
-//   //   setSelectedCategory(event.target.value);
-//   // }
-
-//   // const itemsToDisplay = items.filter((item) => {
-//   //   if (selectedCategory === "All") return true;
-//   function handleChange(e) {
-//     console.log(e.target.value);
-//     setSelectedCategory(e.target.value);
-//   }
-
-//   const itemsToDisplay = items.filter((item) => {
-//     // return selectedCategory === "All"
-//     //   ? true
-//     //   : item.category === selectedCategory;
-
-//     if (selectedCategory === "All") {
-//       return true;
-//     } else {
-//       return item.category === selectedCategory;
-//     }
-//   });
-
-//     return item.category === selectedCategory;
-//   };
-
-//   return (
-//     <div className="ShoppingList">
-//       <div className="Filter">
-//       <select onChange={handleChange} name="filter">
-//           <option value="All">Filter by category</option>
-//           <option value="Produce">Produce</option>
-//           <option value="Dairy">Dairy</option>
-//           <option value="Dessert">Dessert</option>
-//         </select>
-//       </div>
-//       <ul className="Items">
-//         {itemsToDisplay.map((item) => (
-//           <Item key={item.id} name={item.name} category={item.category} />
-//         ))}
-//       </ul>
-//     </div>
-//   );
-
-// export default ShoppingList;
-
-import React from "react";
+import React, { useState } from "react";
 import Item from "./Item";
-import { useState } from "react";
 
 function ShoppingList({ items }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  function handleChange(e) {
-    console.log(e.target.value);
-    setSelectedCategory(e.target.value);
+  function handleCategoryChange(event) {
+    // event.target.value will be the value selected by the user
+    setSelectedCategory(event.target.value);
   }
 
+  // we want to filter the items to only display the ones based on the selected category
   const itemsToDisplay = items.filter((item) => {
-    // return selectedCategory === "All"
-    //   ? true
-    //   : item.category === selectedCategory;
+    if (selectedCategory === "All") return true;
 
-    if (selectedCategory === "All") {
-      return true;
-    } else {
-      return item.category === selectedCategory;
-    }
+    return item.category === selectedCategory;
   });
-
-  console.log(itemsToDisplay);
 
   return (
     <div className="ShoppingList">
       <div className="Filter">
-        <select onChange={handleChange} name="filter">
+        <select name="filter" onChange={handleCategoryChange}>
           <option value="All">Filter by category</option>
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
